@@ -1,2 +1,5 @@
 #!/bin/sh
-ifconfig {{ vpn_interface }}  {{ vpn_ip }} netmask {{ vpn_netmask }}
+ip link set {{ vpn_interface }} up
+ip addr add {{ vpn_ip }}/{{ vpn_netmask }} dev {{ vpn_interface }}
+
+ip route add {{ vpn_ip }}/{{ vpn_netmask }} dev $INTERFACE

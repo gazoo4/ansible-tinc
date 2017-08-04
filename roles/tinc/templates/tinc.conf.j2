@@ -1,5 +1,6 @@
 Name = {{ inventory_hostname }}
 AddressFamily = ipv4
+Mode = switch
 Interface = {{ vpn_interface }}
 {% for host in play_hosts %}
 {% if inventory_hostname != hostvars[host]['inventory_hostname'] %}

@@ -16,7 +16,6 @@
     src=tinc.service.j2
     dest=/etc/systemd/system/tinc.service
   register: tinc_service_file
-  when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7")
 
 - name: systemctl daemon-reload (redhat)
   shell: systemctl daemon-reload
@@ -116,7 +115,6 @@
     name=tinc
     enabled=yes
     state=started
-    pattern=tincd -n {{ netname }}
 
 - name: add nodes to /etc/hosts (ansible_inventory resolves to vpn_ip)
   lineinfile: dest=/etc/hosts regexp='.*{{ item }}$' line="{{ hostvars[item].vpn_ip }} {{item}}" state=present
