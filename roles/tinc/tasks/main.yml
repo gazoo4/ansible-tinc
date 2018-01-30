@@ -14,7 +14,7 @@
 - name: create tinc systemd service file (redhat)
   template: >
     src=tinc.service.j2
-    dest=/etc/systemd/system/tinc.service
+    dest=/etc/systemd/system/tinc-{{ netname }}.service
   register: tinc_service_file
 
 - name: systemctl daemon-reload (redhat)
@@ -60,7 +60,7 @@
 - name: ensure tinc hosts file binds to physical ip address
   lineinfile: >
     dest=/etc/tinc/{{ netname }}/hosts/{{ inventory_hostname }}
-    line="Address = {{ physical_ip }}"
+    line="Address = {{ physical_ip }} {{ vpn_port }}"
     create=yes
   notify:
     - restart tinc
@@ -112,7 +112,7 @@
 
 - name: ensure tinc is started
   service: >
-    name=tinc
+    name=tinc-{{ netname }}
     enabled=yes
     state=started
 

@@ -1,5 +1,6 @@
 Name = {{ inventory_hostname }}
 AddressFamily = ipv4
+BindToAddress = {{ physical_ip }} {{ vpn_port }}
 Mode = switch
 Interface = {{ vpn_interface }}
 {% for host in play_hosts %}
