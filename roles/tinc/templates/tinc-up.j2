@@ -2,4 +2,5 @@
 ip link set {{ vpn_interface }} up
 ip addr add {{ vpn_ip }}/{{ vpn_netmask }} dev {{ vpn_interface }}
 
-ip route add {{ vpn_ip }}/{{ vpn_netmask }} dev $INTERFACE
+ip route add {{ vpn_ip }}/{{ vpn_netmask }} dev {{ vpn_interface }}
+
